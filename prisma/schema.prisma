@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String?
+  email     String    @unique
+  role      Role      @default(USER)
+  coinflips Boolean[]
+  city      String
+  country   String
+  pets      Json
+}
+
+model items {
+  id          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name        String?  @db.VarChar(255)
+  description String?
+  price       Decimal? @db.Decimal(10, 2)
+  details     String
+  seller      String?  @db.VarChar(255)
+  image       String?  @db.VarChar(255)
+}
+
+model navbar {
+  id      Int     @id @default(autoincrement())
+  href    String? @db.VarChar(255)
+  section String? @db.VarChar(255)
+}
+
+enum Role {
+  USER
+  ADMIN
+}
