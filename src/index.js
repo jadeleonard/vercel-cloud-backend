@@ -7,19 +7,28 @@ const prisma = new PrismaClient();
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-
-
-
-app.get('/api/getitems',async (res,req) =>{
+app.get('/api/getitems', async (req, res) => {
     try {
         const response = await prisma.items.findMany();
-        if(response.ok){
-            res.json(response)
-        }
+        res.json(response);
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-})
+});
+
+app.post('/api/createitem', async (req, res) => {
+    const { name, description, price, details, seller, image } = req.body;
+    try {
+        const response = await prisma.items.create({
+            data: { name, description, price, details, seller, image }
+        });
+        res.json(response);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 app.get('/api/navbar', async (req, res) => {
     try {
@@ -30,10 +39,39 @@ app.get('/api/navbar', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 const welcome = {
-    "title":"Welcome to This page and This the official API for cloud page"
-}
-    
+    "title": "Welcome to This page and This the official API for cloud page"
+};
+// Update an item
+app.put('/api/updateitem/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    const { name, description, price, details, seller, image } = req.body;
+    try {
+        const updatedItem = await prisma.items.update({
+            where: { id },
+            data: { name, description, price, details, seller, image }
+        });
+        res.json(updatedItem);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Delete an item
+app.delete('/api/deleteitem/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    try {
+        await prisma.items.delete({
+            where: { id }
+        });
+        res.json({ message: 'Item deleted successfully' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 app.get('/', (req, res) => {
     res.send(welcome);
@@ -45,5 +83,3 @@ const server = app.listen(port, () => {
 
 server.keepAliveTimeout = 120 * 1000;
 server.headersTimeout = 120 * 1000;
-
-export default app
