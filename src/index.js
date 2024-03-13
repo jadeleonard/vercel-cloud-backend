@@ -30,9 +30,13 @@ app.get('/api/navbar', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+const welcome = {
+    "title":"Welcome to This page and This the official API for cloud page"
+}
+    
 
 app.get('/', (req, res) => {
-    res.send('Welcome to my Express server!');
+    res.send(welcome);
 });
 
 const server = app.listen(port, () => {
