@@ -10,7 +10,7 @@ app.use(express.json());
 
 
 
-app.get('/api/getItems',async (res,req) =>{
+app.get('/api/getitems',async (res,req) =>{
     try {
         const response = await prisma.items.findMany();
         if(response.ok){
