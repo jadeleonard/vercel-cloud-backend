@@ -18,6 +18,24 @@ app.get('/api/getitems', async (req, res) => {
     }
 });
 
+// Get details for a single item by ID
+app.get('/api/getitems/:id', async (req, res) => {
+    const id = parseInt(req.params.id);
+    try {
+        const item = await prisma.items.findUnique({
+            where: { id }
+        });
+        if (!item) {
+            return res.status(404).json({ error: 'Item not found' });
+        }
+        res.json(item);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 app.post('/api/createitem', async (req, res) => {
     const { name, description, price, details, seller, image } = req.body;
     try {
