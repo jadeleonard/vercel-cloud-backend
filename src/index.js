@@ -8,9 +8,9 @@ const cors = require('cors');
 app.use(express.json());
 app.use(cors());
 
-app.get('/api/getitems', async (req, res) => {
+app.get('/api/getphone', async (req, res) => {
     try {
-        const response = await prisma.items.findMany();
+        const response = await prisma.phone.findMany();
         res.json(response);
     } catch (error) {
         console.log(error);
