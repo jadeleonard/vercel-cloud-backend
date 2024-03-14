@@ -8,30 +8,34 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  name      String?
-  email     String    @unique
-  role      Role      @default(USER)
-  coinflips Boolean[]
-  city      String
-  country   String
-  pets      Json
+  id       Int     @id @default(autoincrement())
+  name     String?
+  email    String  @unique
+  role     Role    @default(USER)
+  address  String
+  mykartId String? @db.Uuid
+  mykart   mykart? @relation(fields: [mykartId], references: [id])
 }
 
-model items {
-  id          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  name        String?  @db.VarChar(255)
-  description String?
-  price       Decimal? @db.Decimal(10, 2)
-  details     String
-  seller      String?  @db.VarChar(255)
-  image       String?  @db.VarChar(255)
+model mykart {
+  id     String @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  values Int
+  User   User[]
 }
 
 model navbar {
   id      Int     @id @default(autoincrement())
   href    String? @db.VarChar(255)
   section String? @db.VarChar(255)
+}
+
+model phone {
+  id      String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name    String
+  price   Decimal? @db.Decimal(10, 2)
+  details String
+  seller  String
+  image   String
 }
 
 enum Role {
