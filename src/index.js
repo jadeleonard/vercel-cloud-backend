@@ -3,9 +3,10 @@ const app = express();
 const port = process.env.PORT || 3001;
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-
+const cors = require('cors');
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(cors());
 
 app.get('/api/getitems', async (req, res) => {
     try {
