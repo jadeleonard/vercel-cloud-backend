@@ -23,7 +23,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'https:cloud-mount-git-main-lukabartos-projects.vercel.app'); 
     res.setHeader('Access-Control-Allow-Origin', 'https://cloud-mount.vercel.app/'); 
     res.setHeader('Access-Control-Allow-Origin', 'cloud-mount-3y2nneodq-lukabartos-projects.vercel.app'); 
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'); // Allow specific HTTP methods
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE','get','post','delete'); // Allow specific HTTP methods
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow specific headers
     next();
   });
