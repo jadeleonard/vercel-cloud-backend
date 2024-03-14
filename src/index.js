@@ -17,6 +17,16 @@ app.get('/api/getitems', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+app.get('/api/carousel',async (res,req) =>{
+        try {
+            const response = await prisma.carousel.findMany();
+            if(response.ok){
+                res.json(response)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+})
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173'); // Set the origin to your frontend URL
 
