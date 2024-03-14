@@ -17,6 +17,12 @@ model User {
   mykart   mykart? @relation(fields: [mykartId], references: [id])
 }
 
+model carousel {
+  id    String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name  String? @db.VarChar(255)
+  image String? @db.VarChar(255)
+}
+
 model items {
   id          String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   name        String?  @db.VarChar(255)
