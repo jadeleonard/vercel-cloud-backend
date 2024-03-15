@@ -17,6 +17,7 @@ app.get('/api/getitems', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 app.get('/api/carousel',async (res,req) =>{
         try {
             const response = await prisma.carousel.findMany();
@@ -27,6 +28,15 @@ app.get('/api/carousel',async (res,req) =>{
             console.log(error)
         }
 })
+app.get('/api/navbar', async (req, res) => {
+    try {
+        const navbarItems = await prisma.navbar.findMany();
+        res.json(navbarItems);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173'); // Set the origin to your frontend URL
 
@@ -69,15 +79,7 @@ app.post('/api/createitem', async (req, res) => {
     }
 });
 
-app.get('/api/navbar', async (req, res) => {
-    try {
-        const navbarItems = await prisma.navbar.findMany();
-        res.json(navbarItems);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
+
 
 const welcome = {
     "title": "Welcome to This page and This the official API for cloud page"
