@@ -8,6 +8,7 @@
     "start": "nodemon src/index.js",
     "vercel build": "npm i"
   },
+  "type": "commonjs",
   "author": "",
   "license": "ISC",
   "dependencies": {
