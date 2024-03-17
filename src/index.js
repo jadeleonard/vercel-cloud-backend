@@ -64,7 +64,15 @@ app.get('/api/getitems/:id', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
+app.post('/api/createuser',async (res,req) =>{
+    const {email,password} = req.body;
+try {
+    response = await prisma.user.create({email,password});
+    
+} catch (error) {
+    
+}
+})
 
 app.post('/api/createitem', async (req, res) => {
     const { name, description, price, seller, image } = req.body;

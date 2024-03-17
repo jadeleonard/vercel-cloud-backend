@@ -44,6 +44,12 @@ model navbar {
   section String? @db.VarChar(255)
 }
 
+model user {
+  id       String @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  email    String
+  password String
+}
+
 enum Role {
   USER
   ADMIN
