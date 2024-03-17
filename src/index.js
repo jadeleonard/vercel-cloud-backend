@@ -68,9 +68,10 @@ app.post('/api/createuser',async (res,req) =>{
     const {email,password} = req.body;
 try {
     response = await prisma.user.create({email,password});
-    
+    res.json(response)
 } catch (error) {
-    
+    console.log(error);
+    res.status(500).json({ error: 'Internal Server Error' });
 }
 })
 
