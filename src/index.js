@@ -4,9 +4,11 @@ const port = process.env.PORT || 3001;
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const cors = require('cors');
+const api = require('./api-names')
 // Middleware to parse JSON bodies
 app.use(express.json());
 app.use(cors());
+
 
 app.get('/api/getitems', async (req, res) => {
     try {
@@ -28,6 +30,39 @@ app.get('/api/carousel',async (res,req) =>{
             console.log(error)
         }
 })
+app.get('/api/electronics', async (res,req) =>{
+    try {
+        const response = await prisma.electronic.findMany();
+        if(response.ok){
+            res.response.json()
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+app.get('/api/shoes', async (res,req) =>{
+    try {
+        const response = await prisma.shoes.findMany();
+        if(response.ok){
+            res.response.json()
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
+app.get('/api/clothes', async (res,req) =>{
+    try {
+        const response = await prisma.clothes.findMany();
+        if(response.ok){
+            res.response.json()
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+})
 app.get('/api/navbar', async (req, res) => {
     try {
         const navbarItems = await prisma.navbar.findMany();
@@ -37,6 +72,7 @@ app.get('/api/navbar', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173'); // Set the origin to your frontend URL
 
@@ -44,7 +80,11 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'https://cloud-mount.vercel.app/'); 
     res.setHeader('Access-Control-Allow-Origin', 'https://cloud-mount-3y2nneodq-lukabartos-projects.vercel.app'); 
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE','get','post','delete'); // Allow specific HTTP methods
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Allow specific headers
+    res.setHeader('Access-Control-Allow-Headers', `https://vercel-cloud-backend-git-main-lukabartos-projects.vercel.app/navbar`);
+    res.setHeader('Access-Control-Allow-Headers', `https://vercel-cloud-backend-git-main-lukabartos-projects.vercel.app/getitems`)
+    res.setHeader('Access-Control-Allow-Headers', `https://vercel-cloud-backend-git-main-lukabartos-projects.vercel.app/hero`)
+    res.setHeader('Access-Control-Allow-Headers', `https://vercel-cloud-backend-git-main-lukabartos-projects.vercel.app/`) // Allow specific headers
+
     next();
   });
   
@@ -124,7 +164,8 @@ app.delete('/api/deleteitem/:id', async (req, res) => {
 });
 
 app.get('/', (req, res) => {
-    res.send(welcome);
+   
+    res.send(api)
 });
 
 const server = app.listen(port, () => {

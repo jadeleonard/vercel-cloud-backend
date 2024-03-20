@@ -17,10 +17,55 @@ model User {
   mykart   mykart? @relation(fields: [mykartId], references: [id])
 }
 
+model accesories {
+  id          String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name        String? @db.VarChar(500)
+  description String? @db.VarChar(500)
+  image       String? @db.VarChar(500)
+  price       String? @db.VarChar(500)
+  seller      String? @db.VarChar(500)
+}
+
 model carousel {
   id    String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   name  String? @db.VarChar(255)
   image String? @db.VarChar(255)
+}
+
+model clothes {
+  id          String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name        String? @db.VarChar(500)
+  description String? @db.VarChar(500)
+  image       String? @db.VarChar(500)
+  price       String? @db.VarChar(500)
+  seller      String? @db.VarChar(500)
+}
+
+model electronic {
+  id          String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name        String? @db.VarChar(500)
+  description String? @db.VarChar(500)
+  image       String? @db.VarChar(500)
+  price       String? @db.VarChar(500)
+  seller      String? @db.VarChar(500)
+}
+
+model gaming {
+  id          String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name        String? @db.VarChar(500)
+  description String? @db.VarChar(500)
+  image       String? @db.VarChar(500)
+  price       String? @db.VarChar(500)
+  seller      String? @db.VarChar(500)
+}
+
+model house {
+  id          String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name        String? @db.VarChar(500)
+  description String? @db.VarChar(500)
+  image       String? @db.VarChar(500)
+  price       String? @db.VarChar(500)
+  seller      String? @db.VarChar(500)
 }
 
 model items {
@@ -42,6 +87,15 @@ model navbar {
   id      Int     @id @default(autoincrement())
   href    String? @db.VarChar(255)
   section String? @db.VarChar(255)
+}
+
+model shoes {
+  id          String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name        String? @db.VarChar(500)
+  description String? @db.VarChar(500)
+  image       String? @db.VarChar(500)
+  price       String? @db.VarChar(500)
+  seller      String? @db.VarChar(500)
 }
 
 model user {
