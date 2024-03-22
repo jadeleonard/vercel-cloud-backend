@@ -41,17 +41,16 @@ app.get('/api/electronics', async (res,req) =>{
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-app.get('/api/shoes', async (res,req) =>{
+app.get('/api/shoes', async (req, res) => {
     try {
-        const response = await prisma.shoes.findMany();
-        if(response.ok){
-            res.json(response)
-        }
+        const shoes = await prisma.shoes.findMany();
+        res.json(shoes);
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-})
+});
+
 app.get('/api/clothes', async (res,req) =>{
     try {
         const response = await prisma.clothes.findMany();
