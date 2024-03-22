@@ -34,7 +34,7 @@ app.get('/api/electronics', async (res,req) =>{
     try {
         const response = await prisma.electronic.findMany();
         if(response.ok){
-            res.response.json()
+            res.json(response)
         }
     } catch (error) {
         console.log(error);
@@ -56,7 +56,7 @@ app.get('/api/clothes', async (res,req) =>{
     try {
         const response = await prisma.clothes.findMany();
         if(response.ok){
-            res.response.json()
+            res.json(response)
         }
     } catch (error) {
         console.log(error);
