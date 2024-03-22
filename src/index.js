@@ -83,7 +83,7 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', `https://vercel-cloud-backend-git-main-lukabartos-projects.vercel.app/navbar`);
     res.setHeader('Access-Control-Allow-Headers', `https://vercel-cloud-backend-git-main-lukabartos-projects.vercel.app/getitems`)
     res.setHeader('Access-Control-Allow-Headers', `https://vercel-cloud-backend-git-main-lukabartos-projects.vercel.app/hero`)
-    res.setHeader('Access-Control-Allow-Headers', `https://vercel-cloud-backend-git-main-lukabartos-projects.vercel.app/`) // Allow specific headers
+    res.setHeader('Access-Control-Allow-Headers', `https://vercel-cloud-backend-git-main-lukabartos-projects.vercel.app/shoes`) // Allow specific headers
 
     next();
   });

@@ -92,10 +92,15 @@ model navbar {
 model shoes {
   id          String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   name        String? @db.VarChar(500)
-  description String? @db.VarChar(500)
   image       String? @db.VarChar(500)
-  price       String? @db.VarChar(500)
+  description String? @db.VarChar(500)
   seller      String? @db.VarChar(500)
+  price       String? @db.VarChar(500)
+  image2      String? @db.VarChar(500)
+  image3      String? @db.VarChar(500)
+  image4      String? @db.VarChar(500)
+  image5      String? @db.VarChar(500)
+  image6      String? @db.VarChar(500)
 }
 
 model user {
