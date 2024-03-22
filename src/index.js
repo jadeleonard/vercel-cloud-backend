@@ -45,7 +45,7 @@ app.get('/api/shoes', async (res,req) =>{
     try {
         const response = await prisma.shoes.findMany();
         if(response.ok){
-            res.response.json()
+            res.json(response)
         }
     } catch (error) {
         console.log(error);
